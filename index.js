@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const home = require("./router/home");
+const customer = require("./router/home");
 const app = express();
 
 //connect to MongoDB
@@ -11,6 +12,7 @@ mongoose
 
 // post use
 app.use(express.json());
+app.use("/api/customer", customer);
 app.use("/", home);
 
 // set prot environment
