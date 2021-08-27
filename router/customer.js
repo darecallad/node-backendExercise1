@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const express = require("express");
-const joi = require("joi");
+const Joi = require("joi");
 const router = express.Router();
 
 // Create Schema
@@ -25,7 +25,8 @@ const Customer = mongoose.model("Customer", customerSchema);
 
 function validateCustomer(customer) {
   const schema = {
-    name: Joi.String().min(2).max(10).required(),
+    name: Joi.string().min(2).max(10).required(),
+    phone: Joi.string().min(1).max(20).required(),
   };
   return Joi.validate(customer, schema);
 }
@@ -52,7 +53,7 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //new customer
-  let customer = new Customer({ name: req.body.name });
+  let customer = new Customer({ name: req.body.name, phone: req.body.phone });
   customer = await customer.save();
 
   res.send(customer);
@@ -83,4 +84,4 @@ router.delete("/:id", async (req, res) => {
   res.send(customer);
 });
 
-module.export = router;
+module.exports = router;

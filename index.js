@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const home = require("./router/home");
-const customer = require("./router/home");
+const customer = require("./router/customer");
 const app = express();
 
 //connect to MongoDB
