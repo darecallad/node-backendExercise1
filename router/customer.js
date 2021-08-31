@@ -27,6 +27,7 @@ function validateCustomer(customer) {
   const schema = {
     name: Joi.string().min(2).max(10).required(),
     phone: Joi.string().min(1).max(20).required(),
+    isGold: Joi.boolean(),
   };
   return Joi.validate(customer, schema);
 }
@@ -53,7 +54,11 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   //new customer
-  let customer = new Customer({ name: req.body.name, phone: req.body.phone });
+  let customer = new Customer({
+    name: req.body.name,
+    phone: req.body.phone,
+    isGold: req.body.isGold,
+  });
   customer = await customer.save();
 
   res.send(customer);
