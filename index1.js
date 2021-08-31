@@ -5,13 +5,13 @@ const app = express();
 
 // connect to Database
 mongoose
-  .connect("mongodb://localhost/api/customer")
+  .connect("mongodb://localhost/customer")
   .then(() => console.log("Connect to Database...."))
   .catch((ex) => console.log("cannot connect to Database...", ex));
 
 // app use
 app.use(express.json());
-app.use("/api/customer", customer1);
+app.use("/API/customer", customer1);
 
 //port
 const port = process.env.PORT || 5000;
